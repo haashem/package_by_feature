@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:space_launch_theme/space_launch_theme.dart';
+import 'package:upcoming_launches/l10n/generated/upcoming_launches_localizations.dart';
 import 'package:upcoming_launches/src/api/models/upcoming_launches.dart';
+import 'package:upcoming_launches/src/api/service/upcoming_launches_api_service.dart';
 import 'package:upcoming_launches/src/views/launches_list.dart';
 // import 'package:space_launches/di/injection.dart';
 // import 'package:space_launches/features/space_launch_theme/views/loading.dart';
@@ -11,17 +13,16 @@ import 'package:upcoming_launches/src/views/launches_list.dart';
 // import 'package:space_launches/features/upcoming_launches/api/service/upcoming_launches_api_service.dart';
 // import 'package:space_launches/features/upcoming_launches/views/launches_list.dart';
 
-import '../api/service/upcoming_launches_api_service.dart';
-import 'package:flutter_gen/gen_l10n/upcoming_launches_localizations.dart';
+// import '../api/service/upcoming_launches_api_service.dart';
 
 class SpaceLaunchesListPage extends StatelessWidget {
   const SpaceLaunchesListPage({Key? key}) : super(key: key);
-  
+
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-            title: Text(UpcomingLaunchesLocalizations.of(context)
-                !.upcomingLaunchesPageTitle)),
+            title: Text(UpcomingLaunchesLocalizations.of(context)!
+                .upcomingLaunchesPageTitle)),
         body: FutureBuilder<UpcomingLaunches>(
           future: GetIt.instance<UpcomingLaunchesApiService>()
               .getUpcomingLaunches(),
