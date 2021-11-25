@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:injectable/injectable.dart';
-import 'package:space_launches/di/injection.dart';
+import 'package:space_launches/di/injection.dart' as di;
 import 'package:space_launches/routes/router.gr.dart';
+import 'package:upcoming_launches/upcoming_launches.dart';
 
 void main() {
-  configureDI(environment: Environment.prod);
+  di.configureDI(environment: Environment.prod);
   runApp(SpaceLaunchesApp());
 }
 
@@ -21,9 +23,9 @@ class SpaceLaunchesApp extends StatelessWidget {
               .appBarTheme
               .copyWith(brightness: Brightness.dark),
         ),
-        routerDelegate: getIt<SpaceLaunchesRouter>().delegate(),
+        routerDelegate: di.getIt<SpaceLaunchesRouter>().delegate(),
         routeInformationParser:
-            getIt<SpaceLaunchesRouter>().defaultRouteParser(),
+            di.getIt<SpaceLaunchesRouter>().defaultRouteParser(),
         supportedLocales: [Locale('en'), Locale('fa')],
         // I want to pass other modules Localizations delegate to this list, so
         // MaterialApp knows where to lookup for localizations
@@ -36,6 +38,10 @@ class SpaceLaunchesApp extends StatelessWidget {
         // to the lib folder and make them accessible by exporting them in
         // upcoming_launches.dart becaue the new transaltion can be added or changed
         // and I may miss to move those files to the lib folder.
-        localizationsDelegates: [UpcomingLaunchesLocalizations.delegate],
+        localizationsDelegates: [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          UpcomingLaunchesLocalizations.delegate,
+        ],
       );
 }

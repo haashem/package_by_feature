@@ -1,3 +1,5 @@
+// ignore_for_file: invalid_annotation_target
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:launch_details/src/api/models/launch_mission.dart';
 import 'package:launch_status/launch_status.dart';
